@@ -1,0 +1,22 @@
+{
+    "Name": "meeLib",
+    "Version": 0.1,
+    "Author": "Yann Meessen",
+    "Location": "Paris, France",
+    "Mail": "yann.meessen@gmail.com",
+    "Tools": {
+        "pfd_path": "C:\\Program Files\\Chaos Group\\Phoenix FD\\3ds Max 2024 for x64\\bin\\cache_converter.exe"
+    },
+    "About1": "meeLib is my first ever published coding project.",
+    "About2": "'mee' comes from the first 3 letters of my last name : Meessen",
+    "About3": "This is pronounced 'm\u025b' like the first syllable of 'Metal'.",
+    "About4": "Also, pardon my english, it's not my native language.",
+    "About5": "If you spot any bug, have any criticism about this lib",
+    "About6": "or just want to chat, please contact me through my e-mail above :D",
+    "Licence": "This is free to use, edit, whatever. Just don't sell it, that's weird",
+    "Socials": {
+        "gitHub": "https://github.com/yameessen",
+        "LinkedIn": "https://www.linkedin.com/in/yann-meessen/",
+        "OnlyFans": null
+    }
+}
