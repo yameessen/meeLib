@@ -10,19 +10,25 @@ cfg_file = MEELIB + '/config.json'
 def display_message(type, text):
     now = datetime.now()
     time = f'[{now.strftime("%H:%M:%S")}] - '
+    sev = hou.severityType.Message
+    ask = 1
     if type == 0:
-        sev = hou.severityType.Message
         message = 'meeLib : ' + text
     elif type == 1:
         sev = hou.severityType.Error
         message = 'meeLib Error : ' + text
+    elif type == 2:
+        message = 'meeLib : ' + text
     else:
-        raise hou.Error('Error type not found')
-
-    if hou.ui.displayMessage(message, 
+        raise hou.Error('Error: type not found')
+    
+    if type != 2:
+        ask = hou.ui.displayMessage(message, 
                              buttons=('OK', 'Send to Console'), 
                              severity=sev, 
-                             title='meeLib Error') == 1:
+                             title='meeLib Error') == 1
+
+    if ask == 1 or type == 2:
         print(time + message)
 
 def get_cfg_data():
@@ -41,10 +47,21 @@ def write_cfg_data(cfg):
         display_message(1, 'Unable to write Config file.')
         return None
     
+def open_folder(path):
+    if os.path.exists(path):
+        hou.ui.showInFileBrowser(path)
+        return True
+    else:
+        display_message(0, 'Output dir does not exist')
+        return False
+    
 def clean_temp_folder(hip):
     path = os.path.dirname(hip) + '/meeLib_temp/'
     if os.path.exists(path):
         shutil.rmtree(path, ignore_errors = False)
+        return True
+    else:
+        return False
     
 def add_credits_to_hda(node):
     cfg = get_cfg_data()

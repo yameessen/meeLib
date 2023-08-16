@@ -54,4 +54,3 @@ def install_path_write():
     cfg = config.get_cfg_data()
     cfg['Tools']['pfd_path'] = str(new_path)
     config.write_cfg_data(cfg)   
-    pass
