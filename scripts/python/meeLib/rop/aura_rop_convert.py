@@ -1,6 +1,21 @@
 import hou
 import subprocess as sp
 from meeLib import aura
+from meeLib import config
+
+#node_debug = hou.pwd().node('../../')
+#if node_debug == None:
+#    node_debug = hou.pwd().node('../../../../')
+#debug = node_debug.evalParm('adv_debug_mode')
+
+try:
+    debug = hou.pwd().node('../../').evalParm('adv_debug_mode')
+except:
+    debug = hou.pwd().node('../../../../').evalParm('adv_debug_mode')
+debug = 1
+frame = hou.intFrame()
+if debug == 1:
+    config.display_message(2, f'VDB to AUR : Exporting frame {frame} : Starting ⏳')
 
 node = hou.pwd().node('../../EXPORT')
 if node == None:
@@ -8,7 +23,6 @@ if node == None:
 geo = node.geometry()
 
 exe = aura.install_path_get()
-frame = hou.intFrame()
 
 # bad solution to get attribs, pyLance doesn't like that
 '''
@@ -32,3 +46,6 @@ except:
 si = sp.STARTUPINFO()
 si.dwFlags |= sp.STARTF_USESHOWWINDOW
 sp.call(f'"{exe}" -srcfile "{src}" -dstfile "{dst}" -storagequality {quality}', startupinfo=si)
+
+if debug == 1:
+    config.display_message(2, f'VDB to AUR : Exporting frame {frame} : Success ✔️')
