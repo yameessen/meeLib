@@ -1,6 +1,6 @@
 {
     "Name": "meeLib",
-    "Version": 0.1,
+    "Version": 0.11,
     "Author": "Yann Meessen",
     "Location": "Paris, France",
     "Mail": "yann.meessen@gmail.com",
@@ -11,8 +11,10 @@
     "About2": "'mee' comes from the first 3 letters of my last name : Meessen",
     "About3": "This is pronounced 'm\u025b' like the first syllable of 'Metal'.",
     "About4": "Also, pardon my english, it's not my native language.",
-    "About5": "If you spot any bug, have any criticism about this lib",
-    "About6": "or just want to chat, please contact me through my e-mail above :D",
+    "About5": "Icons are provided by flaticon.com and converted with svgtrace.com",
+    "About6": "Icons artistic direction, named 'Pipou', is a colaboration with Aude Portalès.",
+    "About7": "If you spot any bug, have any criticism about this lib",
+    "About8": "or just want to chat, please contact me through my e-mail above :D",
     "Licence": "This is free to use, edit, whatever. Just don't sell it, that's weird",
     "Socials": {
         "gitHub": "https://github.com/yameessen",
