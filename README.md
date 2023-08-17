@@ -13,6 +13,7 @@ Library of Houdini HDAs filled with Python 3 scripting to answer specific issues
 - This library works with **Houdini 19.x** or higher and **Python 3.7.x** or higher
 #### For "VDB to AUR" node:
 - You need **PhoenixFD 2023** or higher (any DCC will work) [Chaos Group PhoenixFD](https://www.chaos.com/phoenix)
+- HDA only works with **Windows** (since PhoenixFD is Windows only)
 - You don't need a V-Ray or PhoenixFD **licence** to use this tool. A node exists with V-Ray for Houdini but it requires V-Ray and a Licence
 - This tool use the "cache-converter.exe" bin inside the PhoenixFD folder
 
