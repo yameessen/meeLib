@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mainMenu>
+    <menuBar>
+        <subMenu id="meelib_menu">
+            <modifyItem>
+                <insertBefore>help_menu</insertBefore>
+            </modifyItem>
+            <label>meeLib</label>
+            <scriptItem id="meelib_flipbook">
+                <label>Flipbook</label>
+                <scriptCode>
+                    <![CDATA[
+from meelib import flipbook
+flipbook.run_flipbook()
+                    ]]>
+                </scriptCode>
+            </scriptItem>
+        </subMenu>
+    </menuBar>
+</mainMenu>

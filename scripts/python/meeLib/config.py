@@ -1,10 +1,10 @@
-'''
+"""
 
-        */meeLib.config
-            Core functions of the meeLib library
-            These are used on pretty much everything
+*/meeLib.config
+    Core functions of the meeLib library
+    These are used on pretty much everything
 
-'''
+"""
 
 import hou
 import os
@@ -12,213 +12,210 @@ import shutil
 import json
 from datetime import datetime
 
-'''
+"""
 ________INIT VARIABLES
-'''
-MEELIB = os.environ['MEELIB']
-cfg_file = MEELIB + '/config.json'
+"""
+MEELIB = os.environ["MEELIB"]
+cfg_file = MEELIB + "/config.json"
 
 
-
-'''
+"""
 ________MAIN FUNCTIONS
-'''
+"""
+
+
 def display_message(type, text):
-    '''
-    Display the {text} argument using meeLib formating. It provides differents severity, prefix the message with 'meeLib -' and adds the current time if send to console.
-    
-        ARGUMENTS:
-                type (int): Use to specify the type of the display (0 is message, 1 is error, 2 is console)
-                text (string): The message to display
-                
-        RETURN:
-                True or False (bool)
-                
-        EXAMPLE:
-                >>> display_message(1, 'Unable to find') # This will display an Error hou.ui window with 'meeLib - Unable to find' as text
-                True
-    '''
+    """
+    Display the ``text`` argument using meeLib formatting. Provides different severities, prefixes the message with 'meeLib -', and adds the current time if sent to console.
+
+    :param int type: Specifies the type of display (0: message, 1: error, 2: console)
+    :param str text: The message to display
+    :returns: True if the message was displayed, False otherwise
+    :rtype: bool
+
+    :example:
+        >>> display_message(1, 'Unable to find')
+        True
+    """
     now = datetime.now()
     time = f'[{now.strftime("%H:%M:%S")}] - '
     sev = hou.severityType.Message
     ask = 1
     if type == 0:
-        message = 'meeLib : ' + text
+        message = "meeLib : " + text
     elif type == 1:
         sev = hou.severityType.Error
-        message = 'meeLib Error : ' + text
+        message = "meeLib Error : " + text
     elif type == 2:
-        message = 'meeLib : ' + text
+        message = "meeLib : " + text
     else:
-        raise hou.Error('Error: type not found')
+        raise hou.Error("Error: type not found")
     return False
     if type != 2:
-        ask = hou.ui.displayMessage(message, 
-                             buttons=('OK', 'Send to Console'), 
-                             severity=sev, 
-                             title='meeLib Error') == 1
+        ask = (
+            hou.ui.displayMessage(message, buttons=("OK", "Send to Console"), severity=sev, title="meeLib Error") == 1
+        )
     if ask == 1 or type == 2:
         print(time + message)
     return True
 
+
 def open_folder(path):
-    '''
-    Open the 'path' argument directory using the system's favorite file explorer.
-    
-        ARGUMENTS:
-                path (string): the directory path
-                
-        RETURN:
-                True or False (bool)
-                
-        EXAMPLE:
-                >>> path = hou.hipFile.path()
-                >>> open_folder(path)
-                True
-    '''
+    """
+    Open the ``path`` directory using the system's default file explorer.
+
+    :param str path: The directory path
+    :returns: True if the folder was opened, False otherwise
+    :rtype: bool
+
+    :example:
+        >>> path = hou.hipFile.path()
+        >>> open_folder(path)
+        True
+    """
     if os.path.exists(path):
         hou.ui.showInFileBrowser(path)
         return True
     else:
-        display_message(0, 'Output dir does not exist')
+        display_message(0, "Output dir does not exist")
         return False
-    
+
+
 def clean_temp_folder(hip):
-    '''
-    Destroy the temp folder [meeLib_temp] located in the {hip} path. It will return False if the folder is does not exist.
-    
-        ARGUMENTS:
-                hip (string): the path of the current $HIP, usualy provided by 'hou.hipFile.path()'
-                
-        RETURN:
-                True or False (bool)
-                
-        EXAMPLE:
-                >>> hip = hou.hipFile.path()
-                >>> clean_temp_folder(hip)
-                True
-    '''
-    path = os.path.dirname(hip) + '/meeLib_temp/'
+    """
+    Destroy the temp folder [meeLib_temp] located in the ``hip`` path. Returns False if the folder does not exist.
+
+    :param str hip: The path of the current $HIP, usually provided by ``hou.hipFile.path()``
+    :returns: True if the folder was deleted, False otherwise
+    :rtype: bool
+
+    :example:
+        >>> hip = hou.hipFile.path()
+        >>> clean_temp_folder(hip)
+        True
+    """
+    path = os.path.dirname(hip) + "/meeLib_temp/"
     if os.path.exists(path):
-        shutil.rmtree(path, ignore_errors = False)
+        shutil.rmtree(path, ignore_errors=False)
         return True
     else:
         return False
-    
-    
-'''
+
+
+"""
 ________CONFIG FUNCTIONS
-'''
+"""
+
+
 def get_cfg_data():
-    '''
-    Return a dictionnary of what's inside the [config.json] at the root of the meeLib library.
-    
-        ARGUMENTS:
-                None
-        
-        RETURN:
-                (dict): content of [config.json] inside the $MEELIB dir
-        
-        EXAMPLE:
-                >>> cfg = get_cfg_data()
-                >>> print(cfg['Name'])
-                meeLib
-    '''
+    """
+    Return a dictionary of the contents of [config.json] at the root of the meeLib library.
+
+    :returns: Content of [config.json] inside the $MEELIB directory
+    :rtype: dict or None
+
+    :example:
+        >>> cfg = get_cfg_data()
+        >>> print(cfg['Name'])
+        meeLib
+    """
     if os.path.isfile(cfg_file):
-        with open(cfg_file, 'r') as file:
+        with open(cfg_file, "r") as file:
             return json.load(file)
     else:
-        display_message(1, 'Config file not found.')
+        display_message(1, "Config file not found.")
         return None
-    
+
+
 def write_cfg_data(cfg):
-    '''
-    Override the [config.json] at the root of the meeLib library with the cfg (dict) argument.
-    Use this command with caution, as it can whipe the whole config. If so, re-install the meeLib library.
-    
-        ARGUMENTS:
-                cfg (dict): a dictionnary of the [config.json] file. It is supposed be the edited one initialy generated by get_cfg_data()
-                
-        RETURN:
-                True or False (bool)
-                
-        EXAMPLE:
-                >>> cfg = get_cfg_data()
-                >>> cfg['name'] = 'meemeeLib'
-                >>> write_cfg_data(cfg)
-                True
-    '''
+    """
+    Override the [config.json] at the root of the meeLib library with the ``cfg`` argument.
+    Use with caution, as it can wipe the whole config. If so, re-install the meeLib library.
+
+    :param dict cfg: The dictionary representing the [config.json] file, usually generated by ``get_cfg_data()``
+    :returns: True if the config was written, False otherwise
+    :rtype: bool
+
+    :example:
+        >>> cfg = get_cfg_data()
+        >>> cfg['name'] = 'meemeeLib'
+        >>> write_cfg_data(cfg)
+        True
+    """
     if os.path.isfile(cfg_file) and type(cfg) is dict:
-        with open(cfg_file, 'w') as file:
+        with open(cfg_file, "w") as file:
             json.dump(cfg, file, indent=4)
             return True
     else:
-        display_message(1, 'Unable to write Config file.')
+        display_message(1, "Unable to write Config file.")
         return False
-    
-    
-'''
+
+
+"""
 ________CREDIT FUCNTIONS
-'''    
+"""
+
+
 def add_credits_to_hda(node):
-    '''
-    This will add the credits hda parameters to the current {node}. This function will only works used in the onCreated of the Script tab of the HDA.
-    
-        ARGUMENTS:
-                node (class 'hou.Node'): The current node. Usually provided by 'kwargs["node"]'
-            
-        RETURN:
-                True (bool)
-                
-        EXAMPLE:
-                >>> node = kwargs['node']
-                >>> add_credits_to_hda(node)
-                True
-    '''
+    """
+    Add the credits HDA parameters to the current ``node``. This function should only be used in the onCreated event of the Script tab of the HDA.
+
+    :param hou.Node node: The current node, usually provided by ``kwargs['node']``
+    :returns: True if the credits were added
+    :rtype: bool
+
+    :example:
+        >>> node = kwargs['node']
+        >>> add_credits_to_hda(node)
+        True
+    """
     cfg = get_cfg_data()
     parm_template = node.parmTemplateGroup()
     parm_list = []
     label_list = []
-    # fill column_labels list to align text to left 
+    # fill column_labels list to align text to left
     for i in range(16):
-        label_list.append('')
+        label_list.append("")
     for key in cfg:
-        parm = ''
+        parm = ""
         value = cfg[key]
-        if key == 'Tools':
-            parm_list.append(hou.SeparatorParmTemplate(f'credits_{key}_sep', 
-                                                       tags={'sidefx::layout_height': 'medium', 'sidefx::look': 'blank'}))
+        if key == "Tools":
+            parm_list.append(
+                hou.SeparatorParmTemplate(
+                    f"credits_{key}_sep", tags={"sidefx::layout_height": "medium", "sidefx::look": "blank"}
+                )
+            )
             continue
-        elif key == 'Socials':
-            parm_list.append(hou.SeparatorParmTemplate(f'credits_{key}_sep', 
-                                                       tags={'sidefx::layout_height': 'medium', 'sidefx::look': 'blank'}))
+        elif key == "Socials":
+            parm_list.append(
+                hou.SeparatorParmTemplate(
+                    f"credits_{key}_sep", tags={"sidefx::layout_height": "medium", "sidefx::look": "blank"}
+                )
+            )
             for link in value:
                 if value[link] != None:
-                    parm = hou.ButtonParmTemplate(f'credits_button_{link}',
-                                                  link,
-                                                  join_with_next=True, 
-                                                  script_callback='exec("""\nimport webbrowser\n\nwebbrowser.open(\'' + value[link] + '\')\n""")',
-                                                  script_callback_language=hou.scriptLanguage.Python)
+                    parm = hou.ButtonParmTemplate(
+                        f"credits_button_{link}",
+                        link,
+                        join_with_next=True,
+                        script_callback='exec("""\nimport webbrowser\n\nwebbrowser.open(\''
+                        + value[link]
+                        + '\')\n""")',
+                        script_callback_language=hou.scriptLanguage.Python,
+                    )
                     parm_list.append(parm)
-            parm_list.append(hou.LabelParmTemplate(f'credits_{key}_label_end', 
-                                                   title, 
-                                                   ()))
+            parm_list.append(hou.LabelParmTemplate(f"credits_{key}_label_end", title, ()))
         else:
             label_list[0] = str(value)
-            if key.startswith('About'):
-                title = key[:-1] if key.endswith('1') else ' '
-                parm = hou.LabelParmTemplate(f'credits_{key}', 
-                                             title, 
-                                             label_list)
+            if key.startswith("About"):
+                title = key[:-1] if key.endswith("1") else " "
+                parm = hou.LabelParmTemplate(f"credits_{key}", title, label_list)
             else:
-                parm = hou.LabelParmTemplate(f'credits_{key}', 
-                                             key, 
-                                             label_list)
+                parm = hou.LabelParmTemplate(f"credits_{key}", key, label_list)
             parm_list.append(parm)
-    credits_folder = hou.FolderParmTemplate('credits',
-                                            'Credits',
-                                            parm_templates = parm_list,
-                                            folder_type = hou.folderType.Collapsible)
-    parm_template.appendToFolder('Advanced', credits_folder)
+    credits_folder = hou.FolderParmTemplate(
+        "credits", "Credits", parm_templates=parm_list, folder_type=hou.folderType.Collapsible
+    )
+    parm_template.appendToFolder("Advanced", credits_folder)
     node.setParmTemplateGroup(parm_template)
     return True

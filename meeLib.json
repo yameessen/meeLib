@@ -4,9 +4,7 @@
             "MEELIB": "$HOUDINI_USER_PREF_DIR/packages/meeLib"
         }
     ],
-    
-    "hpath": 
-	{
-		"houdini_version>='19.0'" : "$MEELIB"
-	}
+    "hpath": {
+        "houdini_version>='19.0'": "$MEELIB"
+    }
 }
