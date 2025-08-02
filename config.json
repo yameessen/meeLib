@@ -1,24 +1,16 @@
 {
-    "Name": "meeLib",
-    "Version": 0.11,
-    "Author": "Yann Meessen",
-    "Location": "Paris, France",
-    "Mail": "yann.meessen@gmail.com",
-    "Tools": {
-        "pfd_path": "C:\\Program Files\\Chaos Group\\Phoenix FD\\3ds Max 2024 for x64\\bin\\cache_converter.exe"
-    },
-    "About1": "meeLib is my first ever published coding project.",
-    "About2": "'mee' comes from the first 3 letters of my last name : Meessen",
-    "About3": "This is pronounced 'm\u025b' like the first syllable of 'Metal'.",
-    "About4": "Also, pardon my english, it's not my native language.",
-    "About5": "Icons are provided by flaticon.com and converted with svgtrace.com",
-    "About6": "Icons artistic direction, named 'Pipou', is a colaboration with Aude Portalès.",
-    "About7": "If you spot any bug, have any criticism about this lib",
-    "About8": "or just want to chat, please contact me through my e-mail above :D",
-    "Licence": "This is free to use, edit, whatever. Just don't sell it, that's weird",
-    "Socials": {
-        "gitHub": "https://github.com/yameessen",
-        "LinkedIn": "https://www.linkedin.com/in/yann-meessen/",
-        "OnlyFans": "404 not found"
+    "abouts": {
+        "name": "meeLib",
+        "version": "1.0.000",
+        "author": "Yann Meessen",
+        "location": "Paris, France",
+        "mail": "yann.meessen@gmail.com",
+        "description": "meeLib is my first ever published coding project.\n'mee' comes from the first 3 letters of my last name : Meessen\nThis is pronounced 'm\u025b' like the first syllable of 'Metal'.\nAlso, pardon my english, it's not my native language.\nIcons are provided by flaticon.com and converted with svgtrace.com\nIcons artistic direction, named 'Pipou', is a colaboration with Aude Portalès.\nIf you spot any bug, have any criticism about this lib\nor just want to chat, please contact me through my e-mail above :D",
+        "licence": "Use, modify, and share freely.\nDo not sell without substantial changes or rebrand without clear improvements.",
+        "socials": {
+            "github": "https://github.com/yameessen",
+            "linkedin": "https://www.linkedin.com/in/yann-meessen/",
+            "onlyfans": "https://www.youtube.com/watch?v=GJNd5wFwKoc"
+        }
     }
 }

@@ -11,8 +11,18 @@
                 <label>Flipbook</label>
                 <scriptCode>
                     <![CDATA[
-from meelib import flipbook
+from meeLib import flipbook
 flipbook.run_flipbook()
+                    ]]>
+                </scriptCode>
+            </scriptItem>
+            <separatorItem id="meelib_menu_sep1"/>
+            <scriptItem id="meelib_abouts">
+                <label>Abouts</label>
+                <scriptCode>
+                    <![CDATA[
+from meeLib import config
+config.display_abouts()
                     ]]>
                 </scriptCode>
             </scriptItem>
