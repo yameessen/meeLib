@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuDocument>
+    <menu>
+        <insertAfter>show_visualizers</insertAfter>
+        <scriptItem id="meeLib_show_nodeinternal_folder">
+            <label>meeLib - Show Node Internals</label>
+            <context>
+                <expression>
+from meeLib import config
+return config.has_nodeinternal_folder(kwargs["node"])
+                </expression>
+            </context>
+            <scriptCode><![CDATA[
+from meeLib import config
+config.show_nodeinternal_folder(kwargs["node"])
+]]></scriptCode>
+        </scriptItem>
+    </menu>
+</menuDocument>

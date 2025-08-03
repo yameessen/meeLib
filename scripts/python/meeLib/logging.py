@@ -6,9 +6,14 @@
 """
 
 import logging
+import inspect
 
 
-def get_logger(name=__name__):
+def _get_caller_logger():
+    frame = inspect.currentframe()
+    outer = frame.f_back
+    module = inspect.getmodule(outer)
+    name = module.__name__ if module else __name__
     logger = logging.getLogger(name)
     if not logger.hasHandlers():
         logging.basicConfig(
@@ -17,3 +22,6 @@ def get_logger(name=__name__):
             datefmt="%H:%M:%S",
         )
     return logger
+
+
+logger = _get_caller_logger()

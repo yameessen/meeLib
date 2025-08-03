@@ -14,15 +14,11 @@ import hou
 from PySide2 import QtCore, QtWidgets
 from PySide2.QtGui import QIcon, QPixmap
 
-from .logger import get_logger
-
-logger = get_logger(__name__)
+from .logging import logger
 
 # region GLOBALS
 MEELIB_FOLDER = Path(__file__).parent.parent.parent.parent.as_posix()
-print(MEELIB_FOLDER)
 MEELIB_CFG = (Path(MEELIB_FOLDER) / "config.json").as_posix()
-print(MEELIB_CFG)
 
 
 # region MAIN
@@ -54,6 +50,17 @@ def write_cfg_data(cfg):
     else:
         logger.error("Unable to write Config file.")
         return False
+
+
+# region INTERNALS
+def has_nodeinternal_folder(node):
+    return node.parm("meeLib_nodeinternals") is not None
+
+
+def show_nodeinternal_folder(node):
+    nodeinternals_parm = node.parm("meeLib_nodeinternals")
+    current_value = nodeinternals_parm.evalAsInt()
+    nodeinternals_parm.set(0 if current_value == 1 else 1)
 
 
 # region ABOUTS

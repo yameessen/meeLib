@@ -2,12 +2,12 @@
 
 <mainMenu>
     <menuBar>
-        <subMenu id="meelib_menu">
+        <subMenu id="meeLib_menu">
             <modifyItem>
                 <insertBefore>help_menu</insertBefore>
             </modifyItem>
             <label>meeLib</label>
-            <scriptItem id="meelib_flipbook">
+            <scriptItem id="meeLib_flipbook">
                 <label>Flipbook</label>
                 <scriptCode>
                     <![CDATA[
@@ -16,8 +16,8 @@ flipbook.run_flipbook()
                     ]]>
                 </scriptCode>
             </scriptItem>
-            <separatorItem id="meelib_menu_sep1"/>
-            <scriptItem id="meelib_abouts">
+            <separatorItem id="meeLib_menu_sep1"/>
+            <scriptItem id="meeLib_abouts">
                 <label>Abouts</label>
                 <scriptCode>
                     <![CDATA[
