@@ -1,7 +1,7 @@
 """
 
 */meeLib.logger
-    logger settings of the meeLib library
+    Logger settings of the meeLib library
 
 """
 

@@ -5,7 +5,7 @@
 
 '''
 import hou
-from meeLib import config
+from scripts.python.meeLib import config_utils
 
 def clean():
     '''
@@ -13,7 +13,7 @@ def clean():
     '''
     hip = hou.hipFile.path()
     debug = hou.pwd().node('../../').evalParm('adv_debug_mode')
-    if config.clean_temp_folder(hip) and debug == 1:
-        config.display_message(2, f'VDB to AUR : Cleaning temp files : Done 🧹')
-        
+    if config_utils.clean_temp_folder(hip) and debug == 1:
+        config_utils.display_message(2, f'VDB to AUR : Cleaning temp files : Done 🧹')
+
 clean()

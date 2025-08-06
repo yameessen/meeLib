@@ -8,7 +8,7 @@
 import hou
 import subprocess as sp
 from meeLib import aura
-from meeLib import config
+from scripts.python.meeLib import config_utils
 
 def convert():
     '''
@@ -21,7 +21,7 @@ def convert():
         debug = hou.pwd().node('../../../../').evalParm('adv_debug_mode')
     debug = 1
     if debug == 1:
-        config.display_message(2, f'VDB to AUR : Exporting frame {frame} : Starting ⏳')
+        config_utils.display_message(2, f'VDB to AUR : Exporting frame {frame} : Starting ⏳')
 
     node = hou.pwd().node('../../EXPORT')
     if node == None:
@@ -43,6 +43,6 @@ def convert():
     sp.call(f'"{exe}" -srcfile "{src}" -dstfile "{dst}" -storagequality {quality}', startupinfo=si)
 
     if debug == 1:
-        config.display_message(2, f'VDB to AUR : Exporting frame {frame} : Success ✔️')
-        
+        config_utils.display_message(2, f'VDB to AUR : Exporting frame {frame} : Success ✔️')
+
 convert()

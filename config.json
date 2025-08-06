@@ -12,5 +12,34 @@
             "linkedin": "https://www.linkedin.com/in/yann-meessen/",
             "onlyfans": "https://www.youtube.com/watch?v=g4vkYjVVrac"
         }
-    }
+    },
+    "bookmark_comment": "meeLib ShotDesc Bookmark",
+    "colors": {
+        "cyan": [
+            0.4,
+            0.607,
+            0.737
+        ],
+        "blue": [
+            0,
+            0.188,
+            0.286
+        ],
+        "white": [
+            0.992,
+            0.941,
+            0.835
+        ],
+        "red": [
+            0.756,
+            0.070,
+            0.121
+        ],
+        "dark_red": [
+            0.470,
+            0,
+            0
+        ]
+    },
+    "colors_palette": "https://coolors.co/palette/780000-c1121f-fdf0d5-003049-669bbc"
 }

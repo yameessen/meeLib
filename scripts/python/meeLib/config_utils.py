@@ -14,11 +14,7 @@ import hou
 from PySide2 import QtCore, QtWidgets
 from PySide2.QtGui import QIcon, QPixmap
 
-from .logging import logger
-
-# region GLOBALS
-MEELIB_FOLDER = Path(__file__).parent.parent.parent.parent.as_posix()
-MEELIB_CFG = (Path(MEELIB_FOLDER) / "config.json").as_posix()
+from meeLib.logging_utils import logger
 
 
 # region MAIN
@@ -32,7 +28,7 @@ def open_folder(path):
 
 # region CONFIG
 def get_cfg_data():
-    cfg_path = Path(MEELIB_CFG)
+    cfg_path = Path(CFG_PATH)
     if cfg_path.is_file():
         with cfg_path.open("r") as file:
             return json.load(file)
@@ -42,7 +38,7 @@ def get_cfg_data():
 
 
 def write_cfg_data(cfg):
-    cfg_path = Path(MEELIB_CFG)
+    cfg_path = Path(CFG_PATH)
     if cfg_path.is_file() and isinstance(cfg, dict):
         with cfg_path.open("w") as file:
             json.dump(cfg, file, indent=4)
@@ -54,11 +50,11 @@ def write_cfg_data(cfg):
 
 # region INTERNALS
 def has_nodeinternal_folder(node):
-    return node.parm("meeLib_nodeinternals") is not None
+    return node.parm("nodeinternals") is not None
 
 
 def show_nodeinternal_folder(node):
-    nodeinternals_parm = node.parm("meeLib_nodeinternals")
+    nodeinternals_parm = node.parm("nodeinternals")
     current_value = nodeinternals_parm.evalAsInt()
     nodeinternals_parm.set(0 if current_value == 1 else 1)
 
@@ -145,3 +141,11 @@ def display_abouts():
         layout.addWidget(frame)
 
     dialog.exec_()
+
+
+# region GLOBALS
+FOLDER = Path(__file__).parent.parent.parent.parent.as_posix()
+CFG_PATH = (Path(FOLDER) / "config.json").as_posix()
+CFG = get_cfg_data()
+
+# endregion
