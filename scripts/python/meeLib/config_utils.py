@@ -48,6 +48,12 @@ def write_cfg_data(cfg):
         return False
 
 
+class HoudiniStartup:
+    def __init__():
+        network_editor = toolutils.networkEditor()
+        network_editor.setPref("textbadgedescriptiveparm", "full")
+
+
 # region INTERNALS
 def has_nodeinternal_folder(node):
     return node.parm("nodeinternals") is not None

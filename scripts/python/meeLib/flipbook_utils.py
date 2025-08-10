@@ -5,6 +5,8 @@
 
 """
 
+import hou
 
-def run_flipbook():
+
+def render(flipbook_node: hou.Node) -> str:
     print("run")

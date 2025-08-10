@@ -78,13 +78,12 @@ def set_framerange(shotdesc_node: hou.Node = None):
     shotdesc = ShotDesc(node=shotdesc_node)
 
     # clean old bookmark
-    print(hou.anim.bookmarks())
     hou.anim.removeBookmarks(
         list(
             [
                 bookmark
                 for bookmark in hou.anim.bookmarks()
-                if bookmark.comment() == config_utils.MEELIB_CFG["bookmark_comment"]
+                if bookmark.comment() == config_utils.CFG["bookmark_comment"]
             ]
         )
     )
@@ -102,4 +101,4 @@ def set_framerange(shotdesc_node: hou.Node = None):
         f"{shotdesc.sequence} - {shotdesc.shot}", shotdesc.shot_range[0], shotdesc.shot_range[1]
     )
     shotrange_bookmark.setColor(hou.Color(config_utils.CFG["colors"]["cyan"]))
-    shotrange_bookmark.setComment(config_utils.MEELIB_CFG["bookmark_comment"])
+    shotrange_bookmark.setComment(config_utils.CFG["bookmark_comment"])
