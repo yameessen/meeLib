@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.request import urlopen
 
 import hou
+import toolutils
 from PySide2 import QtCore, QtWidgets
 from PySide2.QtGui import QIcon, QPixmap
 
@@ -54,6 +55,9 @@ class HoudiniStartup:
         network_editor.setPref("textbadgedescriptiveparm", "full")
 
 
+# endregion
+
+
 # region INTERNALS
 def has_nodeinternal_folder(node):
     return node.parm("nodeinternals") is not None
@@ -63,6 +67,9 @@ def show_nodeinternal_folder(node):
     nodeinternals_parm = node.parm("nodeinternals")
     current_value = nodeinternals_parm.evalAsInt()
     nodeinternals_parm.set(0 if current_value == 1 else 1)
+
+
+# endregion
 
 
 # region ABOUTS
@@ -147,6 +154,9 @@ def display_abouts():
         layout.addWidget(frame)
 
     dialog.exec_()
+
+
+# endregion
 
 
 # region GLOBALS
