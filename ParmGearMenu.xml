@@ -6,13 +6,13 @@
             <label>meeLib - Show Node Internals</label>
             <context>
                 <expression>
-from meeLib import config
-return config.has_nodeinternal_folder(kwargs["node"])
+from meeLib import config_utils
+return config_utils.has_nodeinternal_folder(kwargs["node"])
                 </expression>
             </context>
             <scriptCode><![CDATA[
-from meeLib import config
-config.show_nodeinternal_folder(kwargs["node"])
+from meeLib import config_utils
+config_utils.show_nodeinternal_folder(kwargs["node"])
 ]]></scriptCode>
         </scriptItem>
     </menu>

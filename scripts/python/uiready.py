@@ -9,4 +9,4 @@
 
 from meeLib.config_utils import HoudiniStartup
 
-HoudiniStartup.ready()
+HoudiniStartup().uiready()

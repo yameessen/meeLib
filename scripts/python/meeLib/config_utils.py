@@ -12,10 +12,29 @@ from urllib.request import urlopen
 
 import hou
 import toolutils
+from meeLib.logging_utils import logger
 from PySide2 import QtCore, QtWidgets
 from PySide2.QtGui import QIcon, QPixmap
 
-from meeLib.logging_utils import logger
+
+# region STARTUP
+class HoudiniStartup:
+    def __init__(self):
+        pass
+
+    def core_init(self):
+        pass
+
+    def ready(self):
+        pass
+
+    def uiready(self):
+        # set desc from node to full
+        network_editor = toolutils.networkEditor()
+        network_editor.setPref("textbadgedescriptiveparm", "full")
+
+
+# endregion
 
 
 # region MAIN
@@ -25,6 +44,9 @@ def open_folder(path):
     else:
         logger.error("Output dir does not exist")
         return False
+
+
+# endregion
 
 
 # region CONFIG
@@ -47,12 +69,6 @@ def write_cfg_data(cfg):
     else:
         logger.error("Unable to write Config file.")
         return False
-
-
-class HoudiniStartup:
-    def __init__():
-        network_editor = toolutils.networkEditor()
-        network_editor.setPref("textbadgedescriptiveparm", "full")
 
 
 # endregion

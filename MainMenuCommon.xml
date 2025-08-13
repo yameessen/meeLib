@@ -11,8 +11,8 @@
                 <label>Flipbook</label>
                 <scriptCode>
                     <![CDATA[
-from meeLib import flipbook
-flipbook.run_flipbook()
+from meeLib import flipbook_utils
+flipbook_utils.run_flipbook()
                     ]]>
                 </scriptCode>
             </scriptItem>
@@ -21,8 +21,8 @@ flipbook.run_flipbook()
                 <label>Abouts</label>
                 <scriptCode>
                     <![CDATA[
-from meeLib import config
-config.display_abouts()
+from meeLib import config_utils
+config_utils.display_abouts()
                     ]]>
                 </scriptCode>
             </scriptItem>

@@ -14,6 +14,7 @@ import hou
 from meeLib import config_utils
 
 
+# region ShotDesc
 class ShotDesc:
     def __init__(self, node: hou.Node = None):
         if node is None:
@@ -22,33 +23,31 @@ class ShotDesc:
 
     @property
     def project(self) -> str:
-        n = self.node
-        return n.parm("project").evalAsString() if n else ""
+        return self.node.parm("project").evalAsString() if self.node else ""
 
     @property
     def shot(self) -> str:
-        n = self.node
-        return n.parm("shot").evalAsString() if n else ""
+        return self.node.parm("shot").evalAsString() if self.node else ""
 
     @property
     def sequence(self) -> str:
-        n = self.node
-        return n.parm("sequence").evalAsString() if n else ""
+        return self.node.parm("sequence").evalAsString() if self.node else ""
 
     @property
     def shot_range(self) -> list:
-        n = self.node
-        return n.parmTuple("shot_range").evalAsInts() if n else []
+        return self.node.parmTuple("shot_range").evalAsInts() if self.node else []
 
     @property
     def shot_handles(self) -> list:
-        n = self.node
-        return n.parmTuple("shot_handles").evalAsInts() if n else []
+        return self.node.parmTuple("shot_handles").evalAsInts() if self.node else []
 
     @property
-    def fps(self) -> list:
-        n = self.node
-        return n.parmTuple("fps").evalAsInts() if n else []
+    def resolution(self) -> list:
+        return self.node.parmTuple("resolution").evalAsInts() if self.node else []
+
+    @property
+    def fps(self) -> int:
+        return hou.getEnvConfigValue("FPS")
 
     @property
     def user(self) -> str:
@@ -74,6 +73,10 @@ class ShotDesc:
         }
 
 
+# endregion
+
+
+# region Main
 def set_framerange(shotdesc_node: hou.Node = None):
     shotdesc = ShotDesc(node=shotdesc_node)
 
@@ -102,3 +105,6 @@ def set_framerange(shotdesc_node: hou.Node = None):
     )
     shotrange_bookmark.setColor(hou.Color(config_utils.CFG["colors"]["cyan"]))
     shotrange_bookmark.setComment(config_utils.CFG["bookmark_comment"])
+
+
+# endregion
