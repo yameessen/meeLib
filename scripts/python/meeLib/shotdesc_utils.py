@@ -10,16 +10,25 @@ import getpass
 from pathlib import Path
 
 import hou
+import nodesearch
 
 from meeLib import config_utils
+from meeLib.logging_utils import logger
 
 
-# region ShotDesc
+# region Class ShotDesc
 class ShotDesc:
     def __init__(self, node: hou.Node = None):
-        if node is None:
-            node = self.get_shotdesc_node()
+        if not node:
+            node = get_shotdesc_node()
+
+        if not node:
+            node = create_shotdesc_node()
+
         self.node = node
+
+    def __repr__(self):
+        return f"----------SHOTDESC----------\n{self.node.parm('desc').evalAsString()}\n----------------------------"
 
     @property
     def project(self) -> str:
@@ -47,7 +56,7 @@ class ShotDesc:
 
     @property
     def fps(self) -> int:
-        return hou.getEnvConfigValue("FPS")
+        return int(hou.getEnvConfigValue("FPS"))
 
     @property
     def user(self) -> str:
@@ -61,10 +70,6 @@ class ShotDesc:
     def timenow(self) -> str:
         return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    @staticmethod
-    def get_shotdesc_node() -> hou.Node:
-        return next((node for node in hou.node("/obj").children() if node.type().name() == "meelib_shotdesc"), None)
-
     def as_dict(self) -> dict:
         return {
             name: getattr(self, name)
@@ -76,7 +81,29 @@ class ShotDesc:
 # endregion
 
 
-# region Main
+# region CREATE
+def create_shotdesc_node():
+    if shotdesc_node := get_shotdesc_node():
+        logger.error("ShotDesc node already exists!")
+        logger.debug(f"[{shotdesc_node.path()}]")
+        return
+
+    return hou.node("/obj/").createNode("meelib_shotdesc", "shotdesc")
+
+
+# endregion
+
+
+# region GET
+def get_shotdesc_node() -> hou.Node:
+    matcher = nodesearch.NodeType("meelib_shotdesc")
+    return next((node for node in matcher.nodes(hou.node("/obj/"))), None)
+
+
+# endregion
+
+
+# region SET
 def set_framerange(shotdesc_node: hou.Node = None):
     shotdesc = ShotDesc(node=shotdesc_node)
 

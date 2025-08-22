@@ -7,12 +7,12 @@
                 <insertBefore>help_menu</insertBefore>
             </modifyItem>
             <label>meeLib</label>
-            <scriptItem id="meeLib_flipbook">
-                <label>Flipbook</label>
+            <scriptItem id="meeLib_CreateShotdesc">
+                <label>Create Shotdesc</label>
                 <scriptCode>
                     <![CDATA[
-from meeLib import flipbook_utils
-flipbook_utils.run_flipbook()
+from meeLib import shotdesc_utils
+shotdesc_utils.create_shotdesc_node()
                     ]]>
                 </scriptCode>
             </scriptItem>

@@ -76,7 +76,7 @@ def write_cfg_data(cfg):
 
 # region INTERNALS
 def has_nodeinternal_folder(node):
-    return node.parm("nodeinternals") is not None
+    return node.parm("meeLib_nodeinternals") is not None
 
 
 def show_nodeinternal_folder(node):
