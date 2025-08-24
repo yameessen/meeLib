@@ -11,6 +11,7 @@ from pathlib import Path
 
 import hou
 import nodesearch
+import nodegraphview
 
 from meeLib import config_utils
 from meeLib.logging_utils import logger
@@ -82,13 +83,19 @@ class ShotDesc:
 
 
 # region CREATE
-def create_shotdesc_node():
-    if shotdesc_node := get_shotdesc_node():
-        logger.error("ShotDesc node already exists!")
-        logger.debug(f"[{shotdesc_node.path()}]")
-        return
+def create_shotdesc_node(set_parms: bool = False) -> hou.Node:
+    shotdesc_node = get_shotdesc_node()
 
-    return hou.node("/obj/").createNode("meelib_shotdesc", "shotdesc")
+    if not shotdesc_node:
+        shotdesc_node = hou.node("/obj/").createNode("meelib_shotdesc", "shotdesc")
+
+    if set_parms:
+        if editor := hou.ui.paneTabOfType(hou.paneTabType.NetworkEditor, 0):
+            shotdesc_node.setSelected(True, clear_all_selected=True)
+            nodegraphview.jumpToNode(editor, shotdesc_node, [shotdesc_node])
+            nodegraphview.frameItems(editor, [shotdesc_node])
+
+    return shotdesc_node
 
 
 # endregion

@@ -12,7 +12,7 @@
                 <scriptCode>
                     <![CDATA[
 from meeLib import shotdesc_utils
-shotdesc_utils.create_shotdesc_node()
+shotdesc_utils.create_shotdesc_node(set_parms=True)
                     ]]>
                 </scriptCode>
             </scriptItem>
